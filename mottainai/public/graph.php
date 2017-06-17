@@ -9,11 +9,10 @@
 		<script>
 		var ctx = document.getElementById("myChart").getContext('2d');
 		var myChart = new Chart(ctx, {
-			type: 'bar',
+			type: 'line',
 			data: {
 				labels: [
 					<?php
-						$row = 1;
 						if( ( $handle = fopen( "../data/data.csv", "r")) !== FALSE)
 						{
 							while( ( $data = fgetcsv($handle, 1000, ",")) !== FALSE)
@@ -25,11 +24,10 @@
 					?>
 				],
 				datasets: [{
-					label: 'ゴミグラフ',
+					label: '廃棄量',
 					data: [
 						//12, 19, 3, 5, 2, 3
 						<?php
-							$row = 1;
 							if( ( $handle = fopen( "../data/data.csv", "r")) !== FALSE)
 							{
 								while( ( $data = fgetcsv($handle, 1000, ",")) !== FALSE)
@@ -40,23 +38,29 @@
 							}
 						?>
 					],
-					backgroundColor: [
-						'rgba(255, 99, 132, 0.2)',
-						'rgba(54, 162, 235, 0.2)',
-						'rgba(255, 206, 86, 0.2)',
-						'rgba(75, 192, 192, 0.2)',
-						'rgba(153, 102, 255, 0.2)',
-						'rgba(255, 159, 64, 0.2)'
+					backgroundColor: 'rgba(255, 99, 132, 0.2)',
+					borderColor: 'rgba( 255, 9, 3, 1)',
+					//borderWidth: 1,
+					fill: false
+				}, {
+					label: '平均量',
+					data: [
+						//12, 19, 3, 5, 2, 3
+						<?php
+							if( ( $handle = fopen( "../data/data.csv", "r")) !== FALSE)
+							{
+								while( ( $data = fgetcsv($handle, 1000, ",")) !== FALSE)
+								{	// http://www.city.osaka.lg.jp/toshikeikaku/cmsfiles/contents/0000164/164883/15-17-1.xls
+									echo "739, ";
+								}
+								fclose( $handle);
+							}
+						?>
 					],
-					borderColor: [
-						'rgba(255,99,132,1)',
-						'rgba(54, 162, 235, 1)',
-						'rgba(255, 206, 86, 1)',
-						'rgba(75, 192, 192, 1)',
-						'rgba(153, 102, 255, 1)',
-						'rgba(255, 159, 64, 1)'
-					],
-					borderWidth: 1
+					backgroundColor: 'rgba( 10, 99, 255, 0.2)',
+					borderColor: 'rgba( 10, 99, 255, 1)',
+					//borderWidth: 1,
+					fill: false
 				}]
 			},
 			options: {
@@ -66,13 +70,21 @@
 							beginAtZero: true,
 							userCallback: function( tick)
 							{
-								return tick.toString( ) + "g";
+								return tick.toString( ) +"g";
 							}
 						}
 					}]
+				},
+				title: {
+					display: true,
+					text: 'ゴミグラフ'
 				}
 			}
 		});
 		</script>
+		<h5>出典</h5>
+		<div>大阪市オープンデータ</div>
+		<div><a href="http://www.city.osaka.lg.jp/shimin/page/0000065430.html">http://www.city.osaka.lg.jp/shimin/page/0000065430.html</a></div>
+		<div><a href="http://www.city.osaka.lg.jp/toshikeikaku/cmsfiles/contents/0000164/164883/15-17-1.xls">http://www.city.osaka.lg.jp/toshikeikaku/cmsfiles/contents/0000164/164883/15-17-1.xls</a></div>
 	</body>
 </html>
