@@ -4,6 +4,7 @@
         <meta charset="utf-8"/>
         <title>Slim 3</title>
         <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+        <!--
         <style>
             body {
                 margin: 50px 0 0 0;
@@ -15,55 +16,71 @@
                 font-size: 18px;
             }
 
-            h1 {
-                color: #719e40;
-                letter-spacing: -3px;
-                font-family: 'Lato', sans-serif;
-                font-size: 100px;
-                font-weight: 200;
-                margin-bottom: 0;
-            }
         </style>
-        <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css"/>
-        <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-        <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+            -->
+        <link type="text/css" rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+        <link type="text/css" rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap-theme.min.css"/>
+        <link type="text/css" rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+        <link type="text/css" rel="stylesheet" href="../node_modules/fullcalendar/dist/fullcalendar.min.css"/>
+        <link type="text/css" rel="stylesheet" href="../node_modules/fullcalendar/dist/fullcalendar.print.min.css"/>
+        <link type="text/css" rel="stylesheet" href="../lib/css/common.css"/>
+
+        <script type="text/javascript" src="../node_modules/fullcalendar/node_modules/moment/moment.js"></script>
+        <script type="text/javascript" src="../node_modules/fullcalendar/node_modules/moment/moment.js"></script>
+        <script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="../lib/js/clock.js"></script>
+        <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../node_modules/fullcalendar/dist/fullcalendar.min.js"></script>
+        <script type="text/javascript" src="../node_modules/fullcalendar/dist/locale/ja.js"></script>
     </head>
     <body>
-        <h1>Slim</h1>
-        <div>a microframework for PHP</div>
+        <h1><img src="../images/logo_mottainai.png" alt="mottainai" height="100px" /></h1>
 
-        <?php if (isset($name)) : ?>
-            <h2>Hello <?= htmlspecialchars($name); ?>!</h2>
-        <?php else: ?>
-            <p>Try <a href="http://www.slimframework.com">SlimFramework</a>
-        <?php endif; ?>
         <div class="container">
             <div class="row">
-                <div class="col-md-1">.col-md-1</div>
-                <div class="col-md-1">.col-md-1</div>
-                <div class="col-md-1">.col-md-1</div>
-                <div class="col-md-1">.col-md-1</div>
-                <div class="col-md-1">.col-md-1</div>
-                <div class="col-md-1">.col-md-1</div>
-                <div class="col-md-1">.col-md-1</div>
-                <div class="col-md-1">.col-md-1</div>
-                <div class="col-md-1">.col-md-1</div>
-                <div class="col-md-1">.col-md-1</div>
-                <div class="col-md-1">.col-md-1</div>
-                <div class="col-md-1">.col-md-1</div>
-            </div>
-            <div class="row">
-                <div class="col-md-8">.col-md-8</div>
-                <div class="col-md-4">.col-md-4</div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">.col-md-4</div>
-                <div class="col-md-4">.col-md-4</div>
-                <div class="col-md-4">.col-md-4</div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">.col-md-6</div>
-                <div class="col-md-6">.col-md-6</div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>時刻</h2>
+                        </div>
+                    </div>
+                    <ul class="clock">
+                        <li><div class="hour"></div></li>
+                        <li>:</li>
+                        <li><div class="min"></div></li>
+                        <li>:</li>
+                        <li><div class="second"></div></li>
+                    </ul>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>今月のゴミ廃棄量</h2>
+                        </div>
+                    </div>
+                    <div class="row top-trash nama">
+                        <a href="graph.php">
+                            <div class="col-md-7">生ゴミ</div>
+                            <div class="col-md-5 tar">13,098g</div>
+                        </a>
+                    </div>
+                    <div class="row top-trash">
+                        <div class="col-md-7">燃えるゴミ</div>
+                        <div class="col-md-5 tar">5,442g</div>
+                    </div>
+                    <div class="row top-trash">
+                        <div class="col-md-7">燃えないゴミ</div>
+                        <div class="col-md-5 tar">2,895g</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div id="calendar">
+                        <script>
+                            $("#calendar").fullCalendar({
+                                aditable: true
+                            });
+                        </script>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
