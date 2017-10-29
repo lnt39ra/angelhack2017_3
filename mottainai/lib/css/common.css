@@ -1,0 +1,44 @@
+h1 {
+    color: #719e40;
+    letter-spacing: -3px;
+    font-family: 'Lato', sans-serif;
+    font-size: 100px;
+    font-weight: 200;
+    margin-bottom: 0;
+    padding: 4px 4px;
+}
+
+h2 {
+    font-weight: 26px;
+}
+
+ul.clock {
+    font-size: 0;
+    padding-left: 2px;
+}
+
+ul.clock li {
+    font-size: 30px;
+    display: inline-block;
+}
+
+.top-time {
+    font-size: 26px;
+}
+
+.top-trash {
+    font-size: 48px;
+}
+
+.nama a:link, a:hover, a:visited, a:active {
+    color: #ff6666;
+}
+
+.tar {
+    display: table-cell;
+    text-align: right;
+}
+
+.fc-today {
+    background-color: #f7ecb5 !important;
+}
