@@ -10,13 +10,23 @@ function initialize() {
         "featureType": "all"
     }]
     var myOptions = {
+        mapType: 'styledMap',
         zoom: 15,
         center: latlng,
         mapTypeId: MY_MAPTYPE_ID,
         mapTypeControl: false,
         disableDefaultUI: true
     };
-    map = new google.maps.Map(document.getElementById('map-canvas'), myOptions);
+    var data = google.visualization.arrayToDataTable([
+        ['Lat', 'Long', 'Weight'],
+        [34.001, 135.5, 2.3],
+        [34.003, 135.48, 3.0]
+    ])
+    map = new google.visualization.Map(document.getElementById('map-canvas'), myOptions);
+    map.draw(data, {
+        showToolTip: true,
+        showInfoWindow: true
+    });
 
     var styledMapOptions = {
         name: 'Pandy Map'

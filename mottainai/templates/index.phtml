@@ -36,7 +36,7 @@
         <script type="text/javascript" src="../node_modules/fullcalendar/dist/fullcalendar.min.js"></script>
         <script type="text/javascript" src="../node_modules/fullcalendar/dist/locale/ja.js"></script>
         <script type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyDRWYvrGuFzBbiuoEvN-dTPXYsYYzAGASE"></script>
-        <script type="text/javascript" src="../lib/js/googlemap.js"></script>
+        <!--script type="text/javascript" src="../lib/js/googlemap.js"></script-->
 
         <script type="text/javascript">
         /*
@@ -53,43 +53,61 @@
         </script>
         <script type='text/javascript'>
          google.charts.load('current', {
-           'packages': ['geochart'],
+           'packages': ['map'],
            // Note: you will need to get a mapsApiKey for your project.
            // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
            'mapsApiKey': 'AIzaSyAaPe-eoiK1_zHIl56SvnXtNbzeQmNc12A'
          });
-         google.charts.setOnLoadCallback(drawMarkersMap);
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                /*
+                ['Lat', 'Long', 'Weight'],
+                [34.001, 135.001, '2.3'],
+                [34.003, 135.003, '3.0'],
+                */
+                ['Lat', 'Long', 'Weight'],
+                [34.6963, 135.5021, 2.3],
+                [34.6919, 135.4913, 3.0],
+                [34.6857, 135.5015, 5.0],
+                [34.6870, 135.4935, 4.3]
+            ]);
 
-          function drawMarkersMap() {
-          var data = google.visualization.arrayToDataTable([
-            ['City',   '', 'Area'],
-            ['Osaka',     2761477,    1285.31],
-            ['Milan',     1324110,    181.76],
-            ['Naples',    959574,     117.27],
-            ['Turin',     907563,     130.17],
-            ['Palermo',   655875,     158.9],
-            ['Genoa',     607906,     243.60],
-            ['Bologna',   380181,     140.7],
-            ['Florence',  371282,     102.41],
-            ['Fiumicino', 67370,      213.44],
-            ['Anzio',     52192,      43.43],
-            ['Ciampino',  38262,      11]
-          ]);
+            var options = {
+                mapType: 'styledMap',
+                showTooltip: true,
+                showInfoWindow: true,
+                mapTypeControl: false,
+                disableDefaultUI: true,
+                displayMode: 'markers',
+                colorAxis: {colors:['green', 'red']},
+                maps: {
+                    styledMap: {
+                        name: 'Styled Map', // This name will be displayed in the map type control.
+                        styles: [
+                        {featureType: 'poi.attraction',
+                         stylers: [{color: '#fce8b2'}]
+                        },
+                        {featureType: 'road.highway',
+                            stylers: [{hue: '#0277bd'}, {saturation: -50}]
+                        },
+                        {featureType: 'road.highway',
+                         elementType: 'labels.icon',
+                            stylers: [{hue: '#000'}, {saturation: 100}, {lightness: 50}]
+                        },
+                        {featureType: 'landscape',
+                            stylers: [{hue: '#259b24'}, {saturation: 10}, {lightness: -22}]
+                        }
+                    ]}}
+                }
 
-        var options = {
-            zoom: 15,
-            region: 'JP',
-            displayMode: 'markers',
-            colorAxis: {colors: ['#33aa33', '#aa3333']}
-        };
-
-          var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
-          chart.draw(data, options);
-        };
+            var map = new google.visualization.Map(document.getElementById('map-canvas'));
+            map.draw(data, options);
+         }
         </script>
 
     </head>
-    <body onload="initialize();">
+    <body>
         <h1><img src="../images/logo_mottainai.png" alt="mottainai" height="100px" /></h1>
 
         <div class="container">
@@ -141,7 +159,7 @@
                     <div id="map-canvas" style="width:100%;height:480px;"></div>
                 </div>
                 <div class="row">
-                    <div id="chart_div" style="width: 100%; height: 500px;"></div>
+                    <!--div id="chart_div" style="width: 100%; height: 500px;"></div-->
                 </div>
             </div>
         </div>
