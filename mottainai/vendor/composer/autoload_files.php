@@ -6,5 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    $vendorDir . '/symfony/polyfill-mbstring/bootstrap.php',
     $vendorDir . '/nikic/fast-route/src/functions.php',
+    $vendorDir . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+    $vendorDir . '/deployer/deployer/src/Support/helpers.php',
+    $vendorDir . '/deployer/deployer/src/functions.php',
 );

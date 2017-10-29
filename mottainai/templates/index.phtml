@@ -4,6 +4,7 @@
         <meta charset="utf-8"/>
         <title>Slim 3</title>
         <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+        <!--
         <style>
             body {
                 margin: 50px 0 0 0;
@@ -15,24 +16,155 @@
                 font-size: 18px;
             }
 
-            h1 {
-                color: #719e40;
-                letter-spacing: -3px;
-                font-family: 'Lato', sans-serif;
-                font-size: 100px;
-                font-weight: 200;
-                margin-bottom: 0;
-            }
         </style>
+            -->
+        <link type="text/css" rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+        <link type="text/css" rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap-theme.min.css"/>
+        <link type="text/css" rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+        <link type="text/css" rel="stylesheet" href="../node_modules/fullcalendar/dist/fullcalendar.min.css"/>
+        <link type="text/css" rel="stylesheet" href="../node_modules/fullcalendar/dist/fullcalendar.print.min.css"/>
+        <link type="text/css" rel="stylesheet" href="../lib/css/common.css"/>
+
+        <script type="text/javascript" src="../node_modules/fullcalendar/node_modules/moment/moment.js"></script>
+        <script type="text/javascript" src="../node_modules/fullcalendar/node_modules/moment/moment.js"></script>
+        <script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
+        <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script type="text/javascript" src="../lib/js/clock.js"></script>
+        <!--script type="text/javascript" src="../lib/js/draw.js"></script-->
+        <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../node_modules/fullcalendar/dist/fullcalendar.min.js"></script>
+        <script type="text/javascript" src="../node_modules/fullcalendar/dist/locale/ja.js"></script>
+        <script type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyDRWYvrGuFzBbiuoEvN-dTPXYsYYzAGASE"></script>
+        <!--script type="text/javascript" src="../lib/js/googlemap.js"></script-->
+
+        <script type="text/javascript">
+        /*
+        function initialize() {
+        var latlng = new google.maps.LatLng(-34.397, 150.644);
+        var myOptions = {
+        zoom: 8,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById('map_canvas'), myOptions);
+        }
+        */
+        </script>
+        <script type='text/javascript'>
+         google.charts.load('current', {
+           'packages': ['map'],
+           // Note: you will need to get a mapsApiKey for your project.
+           // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+           'mapsApiKey': 'AIzaSyAaPe-eoiK1_zHIl56SvnXtNbzeQmNc12A'
+         });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                /*
+                ['Lat', 'Long', 'Weight'],
+                [34.001, 135.001, '2.3'],
+                [34.003, 135.003, '3.0'],
+                */
+                ['Lat', 'Long', 'Weight'],
+                [34.6963, 135.5021, 2.3],
+                [34.6919, 135.4913, 3.0],
+                [34.6857, 135.5015, 5.0],
+                [34.6870, 135.4935, 4.3]
+            ]);
+
+            var options = {
+                mapType: 'styledMap',
+                showTooltip: true,
+                showInfoWindow: true,
+                mapTypeControl: false,
+                disableDefaultUI: true,
+                displayMode: 'markers',
+                colorAxis: {colors:['green', 'red']},
+                maps: {
+                    styledMap: {
+                        name: 'Styled Map', // This name will be displayed in the map type control.
+                        styles: [
+                        {featureType: 'poi.attraction',
+                         stylers: [{color: '#fce8b2'}]
+                        },
+                        {featureType: 'road.highway',
+                            stylers: [{hue: '#0277bd'}, {saturation: -50}]
+                        },
+                        {featureType: 'road.highway',
+                         elementType: 'labels.icon',
+                            stylers: [{hue: '#000'}, {saturation: 100}, {lightness: 50}]
+                        },
+                        {featureType: 'landscape',
+                            stylers: [{hue: '#259b24'}, {saturation: 10}, {lightness: -22}]
+                        }
+                    ]}}
+                }
+
+            var map = new google.visualization.Map(document.getElementById('map-canvas'));
+            map.draw(data, options);
+         }
+        </script>
+
     </head>
     <body>
-        <h1>Slim</h1>
-        <div>a microframework for PHP</div>
+        <h1><img src="../images/logo_mottainai.png" alt="mottainai" height="100px" /></h1>
 
-        <?php if (isset($name)) : ?>
-            <h2>Hello <?= htmlspecialchars($name); ?>!</h2>
-        <?php else: ?>
-            <p>Try <a href="http://www.slimframework.com">SlimFramework</a>
-        <?php endif; ?>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>時刻</h2>
+                        </div>
+                    </div>
+                    <ul class="clock">
+                        <li><div class="hour"></div></li>
+                        <li>:</li>
+                        <li><div class="min"></div></li>
+                        <li>:</li>
+                        <li><div class="second"></div></li>
+                    </ul>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>今月のゴミ廃棄量</h2>
+                        </div>
+                    </div>
+                    <div class="row top-trash nama">
+                        <a href="graph.php">
+                            <div class="col-md-7">生ゴミ</div>
+                            <div class="col-md-5 tar">13,098g</div>
+                        </a>
+                    </div>
+                    <div class="row top-trash">
+                        <div class="col-md-7">燃えるゴミ</div>
+                        <div class="col-md-5 tar">5,442g</div>
+                    </div>
+                    <div class="row top-trash">
+                        <div class="col-md-7">燃えないゴミ</div>
+                        <div class="col-md-5 tar">2,895g</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div id="calendar">
+                        <script>
+                            $("#calendar").fullCalendar({
+                                aditable: true
+                            });
+                        </script>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="map-canvas" style="width:100%;height:480px;"></div>
+                </div>
+                <div class="row">
+                    <!--div id="chart_div" style="width: 100%; height: 500px;"></div-->
+                </div>
+            </div>
+        </div>
+        <div class="container" style="height:100px;">
+            Copyright 2017 Mottainai Project
+        </div>
     </body>
 </html>
